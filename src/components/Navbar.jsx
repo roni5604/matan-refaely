@@ -2,6 +2,7 @@ import { Link } from "react-scroll";
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
+
 const links = [
   { to: "ninja", label: "נינג'ה" },
   { to: "karate", label: "קראטה" },
@@ -32,12 +33,12 @@ export default function Navbar() {
           {/* ימין: לוגו + קישורים */}
           <div className="nav-right">
             <div className="brand-logo-wrap">
-              <img
-                src="/images/logo.jpg"
-                alt="Matan Refaely"
-                className="brand-logo"
-                draggable="false"
-              />
+            <img
+  src={`${import.meta.env.BASE_URL}images/logo.jpg`}
+  alt="Matan Refaely לוגו"
+  className="brand-logo"
+  draggable="false"
+/>
             </div>
 
             <ul className="navlinks navlinks--clean">

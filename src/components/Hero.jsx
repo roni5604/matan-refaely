@@ -3,7 +3,11 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="hero">
-      <img src="/images/matan-refaely_2.jpg" alt="מתן רפאלי" className="hero-bg" />
+<img
+  src={`${import.meta.env.BASE_URL}images/matan-refaely_2.jpg`}
+  alt="מתן רפאלי"
+  className="hero-bg"
+/>
       <div className="hero-content">
         <motion.h1
           initial={{ opacity: 0, y: 18 }}

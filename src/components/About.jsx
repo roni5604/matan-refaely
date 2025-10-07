@@ -19,12 +19,13 @@ export default function About() {
           </p>
         </div>
         <div className="card" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img
-            src="/images/matan-refaely_2.jpg"
-            alt="מתן רפאלי"
-            style={{ borderRadius: 14, width: "100%", height: 290, objectFit: "cover" }}
-            loading="lazy"
-          />
+<img
+  src={`${import.meta.env.BASE_URL}images/matan-refaely_2.jpg`}
+  alt="מתן רפאלי"
+  style={{ borderRadius: 14, width: "100%", height: 290, objectFit: "cover" }}
+  loading="lazy"
+/>
+
         </div>
       </div>
     </Section>

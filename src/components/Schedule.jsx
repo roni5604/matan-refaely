@@ -8,12 +8,13 @@ export default function Schedule() {
       align="center"
     >
       <figure className="schedule-frame">
-        <img
-          src="/images/luz.jpg"
-          alt="לו״ז שבועי — מתן רפאלי"
-          className="schedule-img"
-          loading="lazy"
-        />
+      <img
+  src={`${import.meta.env.BASE_URL}images/luz.jpg`}
+  alt="לו״ז שבועי — מתן רפאלי"
+  className="schedule-img"
+  loading="lazy"
+/>
+
       </figure>
     </Section>
   );

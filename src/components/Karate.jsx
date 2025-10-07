@@ -29,11 +29,12 @@ export default function Karate() {
 
         {/* תמונה מעוצבת */}
         <figure className="figure-frame">
-          <img
-            src="/images/karate_img.jpg"
-            alt="קראטה — מתן רפאלי"
-            loading="lazy"
-          />
+        <img
+  src={`${import.meta.env.BASE_URL}images/karate_img.jpg`}
+  alt="קראטה — מתן רפאלי"
+  loading="lazy"
+/>
+
           <figcaption className="figure-badge">חגורה שחורה • 6+ שנים</figcaption>
         </figure>
       </div>

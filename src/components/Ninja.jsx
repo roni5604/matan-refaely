@@ -11,11 +11,12 @@ export default function Ninja() {
       <div className="grid grid-2">
         {/* תמונה בעיצוב “מוטה” מיוחד */}
         <figure className="figure-tilt">
-          <img
-            src="/images/ninja_img.jpg"
-            alt="נינג'ה — מתן רפאלי"
-            loading="lazy"
-          />
+      <img
+  src={`${import.meta.env.BASE_URL}images/ninja_img.jpg`}
+  alt="נינג'ה — מתן רפאלי"
+  loading="lazy"
+/>
+
         </figure>
 
         {/* טקסט */}
