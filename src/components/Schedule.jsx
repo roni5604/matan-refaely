@@ -4,7 +4,6 @@ export default function Schedule() {
   return (
     <Section
       id="schedule"
-      title="לו״ז"
       align="center"
     >
       <figure className="schedule-frame">
