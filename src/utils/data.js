@@ -5,10 +5,8 @@ export const galleryImages = [
   `${B}images/matan-refaely_3.jpg`,
   `${B}images/matan-refaely_4.jpg`,
   `${B}images/matan-refaely_5.jpg`,
-  `${B}images/PHOTO-2025-06-18-22-17-21.jpg`,
-  `${B}images/PHOTO-2025-06-18-22-17-21 6.jpg`,
-  `${B}images/PHOTO-2025-06-18-22-17-21 7.jpg`,
-  `${B}images/PHOTO-2025-06-18-22-17-21 8.jpg`,
+  `${B}images/matan-refaely_6.jpg`,
+  `${B}images/matan-refaely_7.jpg`
 ];
 
 export const testimonials = [
