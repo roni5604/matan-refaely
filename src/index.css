@@ -1,0 +1,808 @@
+:root{
+  --primary: #0ea5e9;
+  --dark: #0f172a;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --bg: #f7f7f9;
+  --white: #fff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --radius: 18px;
+  --container: 1100px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Heebo", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans Hebrew", "Noto Sans";
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* בסיס מבנה */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* כפתור כללי */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  border: none;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.btn:hover { opacity: .92; transform: translateY(-1px); }
+.btn.dark { background: var(--dark); }
+
+/* כרטיס */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+/* טקסטים */
+h1,h2,h3,h4 { color: var(--dark); margin: 0; }
+p { line-height: 1.75; margin: 0; }
+
+/* --- מבנה כללי --- */
+.section {
+  position: relative;
+  margin: 0 0 96px;
+  padding-top: 36px;
+}
+.section .title {
+  font-size: clamp(26px, 2.8vw, 36px);
+  font-weight: 800;
+}
+.section .subtitle {
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* מפריד עדין בין חלקים */
+.section:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to left, transparent, rgba(0,0,0,0.08), transparent);
+}
+
+/* --- כותרת עליונה --- */
+.header {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 40;
+  backdrop-filter: saturate(180%) blur(6px);
+  transition: background .2s ease, box-shadow .2s ease;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+.header.scrolled {
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+.brand { font-weight: 900; font-size: 20px; color: var(--dark); }
+.brand span { color: var(--primary); }
+
+.navlinks { display: none; gap: 18px; align-items: center; }
+.navlink { color: #111827; text-decoration: none; cursor: pointer; }
+.navlink:hover { color: var(--primary); }
+.menu-btn { background: none; border: none; padding: 6px 8px; cursor: pointer; }
+
+@media (min-width: 768px) {
+  .navlinks { display: flex; }
+}
+
+.mobile-menu {
+  display: grid;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.spacer { height: 72px; }
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  opacity: .25;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(18px, 3vw, 56px);
+}
+.hero h1 {
+  font-size: clamp(28px, 4.2vw, 52px);
+  font-weight: 900;
+}
+.hero p {
+  margin-top: 12px;
+  color: #374151;
+  max-width: 780px;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+/* --- Grid --- */
+.grid { display: grid; gap: 16px; }
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: 1.4fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* --- גלריה (תצוגה בודדת מלאה) --- */
+.gallery-single {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  background: #000; /* רקע letterbox */
+}
+
+/* מציג את כל התמונה בשלמותה */
+.gallery-single img {
+  width: 100%;
+  height: clamp(260px, 40vw, 520px);
+  object-fit: contain;   /* <<< לא נחתך */
+  object-position: center;
+  display: block;
+  background: #000;
+  cursor: zoom-in;
+}
+
+/* כיתוב עדין בתחתית */
+.gallery-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.45), transparent);
+  color: #fff;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+/* --- לייטבוקס --- */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+.lightbox-content {
+  position: relative;
+  width: min(96vw, 1100px);
+  height: min(92vh, 820px);
+  display: grid;
+  place-items: center;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 10px;
+  background: rgba(255,255,255,.9);
+  border: none;
+  border-radius: 999px;
+  padding: 8px;
+  cursor: pointer;
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.9);
+  border: none;
+  border-radius: 999px;
+  padding: 10px;
+  cursor: pointer;
+}
+.lightbox-nav.left { inset-inline-start: 10px; }
+.lightbox-nav.right { inset-inline-end: 10px; }
+.lightbox-counter {
+  position: absolute;
+  bottom: 10px;
+  inset-inline: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+}
+
+/* --- המלצות (תמונה גדולה) --- */
+.testimonial-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+}
+.testimonial-img {
+  width: 100%;
+  height: clamp(320px, 40vw, 520px);
+  object-fit: contain;
+  background: #000;
+  border-radius: 10px;
+  cursor: zoom-in;
+}
+.testimonial-caption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* --- טפסים (יצירת קשר) --- */
+.form input, .form textarea {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.form textarea {
+  height: 140px;
+  resize: vertical;
+}
+.form input:focus, .form textarea:focus {
+  box-shadow: 0 0 0 3px rgba(14,165,233,.25);
+  border-color: var(--primary);
+}
+
+/* --- פוטר --- */
+.footer {
+  border-top: 1px solid #eee;
+  margin-top: 64px;
+}
+.footer-inner {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+/* --- התאמות פריסה לניווט בדסקטופ (RTL מיושר לקצה הימני) --- */
+.header-rtl-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* הנב יופיע בצד ימין כי הוא האלמנט הראשון */
+}
+
+/* מראה קו נקי בין הפריטים */
+.navlinks {
+  display: none;
+  gap: 18px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .navlinks { display: flex; }
+}
+.navlink {
+  color: #111827;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+.navlink:hover { color: var(--primary); }
+
+/* כפתור המבורגר – רק במובייל */
+.show-on-mobile { display: inline-flex; }
+@media (min-width: 768px) {
+  .show-on-mobile { display: none; }
+}
+
+/* --- Drawer מובייל מצד ימין --- */
+.drawer-backdrop{
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  z-index: 1000; display: grid; justify-items: end;
+}
+.drawer-panel{
+  width: min(84vw, 360px);
+  height: 100%;
+  background: #fff;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  transform: translateX(0); /* מופיע כבר פתוח */
+  display: grid; grid-template-rows: auto 1fr;
+  animation: slideIn .18s ease-out both;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+.drawer-header{
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+}
+.drawer-nav{
+  display: grid; gap: 10px;
+  align-content: start;
+}
+.drawer-link{
+  display: block;
+  padding: 12px 8px;
+  border-radius: 10px;
+  color: #111827; text-decoration: none;
+  background: #f7f7f9;
+}
+.drawer-link:hover{
+  background: #eef7ff;
+}
+/* --- דקורציה לתמונת קראטה --- */
+.figure-frame{
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #000;
+  min-height: 280px;
+  display: grid;
+}
+.figure-frame img{
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;       /* מסגרת אלגנטית, מילוי מלא */
+  object-position: center;
+  display: block;
+}
+.figure-badge{
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  background: rgba(14,165,233,.92);
+  color: #fff;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+  font-size: 13px;
+}
+
+/* --- דקורציה לתמונת נינג׳ה (מוטה) --- */
+.figure-tilt{
+  position: relative;
+  transform: rotate(-1.5deg);
+  transition: transform .2s ease;
+}
+.figure-tilt:hover{ transform: rotate(-0.5deg) translateY(-2px); }
+.figure-tilt img{
+  width: 100%;
+  max-height: 520px;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  object-position: center;
+}
+/* פס דקורטיבי קטן */
+.figure-tilt::after{
+  content: "";
+  position: absolute;
+  inset-inline-start: 10px;
+  bottom: -10px;
+  width: 60%;
+  height: 10px;
+  background: linear-gradient(90deg, rgba(14,165,233,.35), transparent);
+  filter: blur(6px);
+  border-radius: 100px;
+}
+
+/* התאמות מובייל – קודם תמונה, ואז טקסט */
+@media (max-width: 767px){
+  .figure-tilt{ order: -1; margin-bottom: 10px; }
+}
+/* --- קלפים להמלצות --- */
+.testimonial-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  height: 100%;
+}
+
+/* תמונה קטנה כברירת מחדל */
+.testimonial-img {
+  width: 100%;
+  border-radius: 10px;
+  background: #000;
+  cursor: zoom-in;
+  display: block;
+  object-fit: contain;
+}
+
+/* גובה מוקטן ונעים */
+.testimonial-img--small {
+  height: clamp(220px, 28vw, 260px);
+}
+
+.testimonial-caption {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* התאמות ל-Swiper חיצים ונקודות RTL */
+.swiper-button-prev,
+.swiper-button-next {
+  color: var(--dark);
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.9);
+  box-shadow: var(--shadow);
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ריווח נעים מעל/מתחת לקרוסלה */
+.testimonial-wrapper {
+  padding-block: 6px;
+}
+
+@media (max-width: 767px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none; /* במובייל לרוב מסתפקים בהחלקה ונקודות */
+  }
+}
+/* --- המלצות: תמונה אחת באמצע, דפדוף נקי --- */
+.testimonial-one-wrapper{
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.testimonial-one-frame{
+  width: min(92vw, 820px);
+  background: #000;                 /* רקע Letterbox לשמירה על קריאות */
+  border-radius: 20px;              /* מעוגל יותר */
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+  overflow: hidden;
+}
+
+.testimonial-one-img{
+  width: 100%;
+  height: clamp(280px, 50vw, 540px); /* גובה רספונסיבי ונעים */
+  object-fit: contain;               /* לא “דורסים” את התמונה */
+  object-position: center;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: default;                   /* אין פעולה בלחיצה */
+  background: #000;
+}
+
+.testimonial-one-caption{
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.testimonial-one-controls{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: min(92vw, 820px);
+}
+
+.btn-outline{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #111827;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+.btn-outline:hover{ background: #f9fafb; transform: translateY(-1px); }
+
+.testimonial-one-dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.testimonial-one-dots .dot{
+  width: 8px; height: 8px; border-radius: 999px;
+  background: #d1d5db; border: none; cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+.testimonial-one-dots .dot:hover{ transform: scale(1.1); }
+.testimonial-one-dots .dot.active{
+  width: 22px; height: 8px; border-radius: 999px;
+  background: var(--primary);
+}
+/* --- המלצות: תמונה אחת באמצע, חיצים בצדדים --- */
+.testimonial-one-wrapper{
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.testimonial-one-frame{
+  width: min(92vw, 820px);
+  background: #000;                 /* letterbox */
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+  overflow: hidden;
+}
+
+.with-side-arrows{ position: relative; }
+
+/* התמונה עצמה */
+.testimonial-one-img{
+  width: 100%;
+  height: clamp(280px, 50vw, 540px);
+  object-fit: contain;               /* שלא נדרוס טקסט */
+  object-position: center;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: default;                   /* אין פעולה בלחיצה */
+  background: #000;
+}
+
+/* כיתוב קטן */
+.testimonial-one-caption{
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* נקודות מצב */
+.testimonial-one-dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.testimonial-one-dots .dot{
+  width: 8px; height: 8px; border-radius: 999px;
+  background: #d1d5db; border: none; cursor: pointer;
+  transition: transform .15s ease, background .15s ease, width .15s ease;
+}
+.testimonial-one-dots .dot:hover{ transform: scale(1.1); }
+.testimonial-one-dots .dot.active{
+  width: 22px; height: 8px; border-radius: 999px;
+  background: var(--primary);
+}
+
+/* חיצים בצדדי התמונה */
+.arrow-btn{
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: none; border-radius: 999px;
+  background: rgba(255,255,255,.95);
+  color: var(--dark);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease, opacity .15s ease;
+}
+.arrow-btn:hover{ transform: translateY(-50%) scale(1.05); background: #fff; }
+.arrow-btn:active{ transform: translateY(-50%) scale(0.97); }
+
+/* RTL: ימין = הקודם, שמאל = הבא */
+.arrow-right{ inset-inline-start: 10px; }  /* ימין ב-RTL */
+.arrow-left{ inset-inline-end: 10px; }     /* שמאל ב-RTL */
+
+/* במסכים צרים – להקטין קצת את החיצים */
+@media (max-width: 480px){
+  .arrow-btn{ width: 34px; height: 34px; }
+}
+/* --- פריסת נב חדשה: ימין = לוגו + קישורים, שמאל = CTA --- */
+.navbar-grid{
+  display: grid;
+  grid-template-columns: 1fr auto; /* ימין תופס, שמאל ל-CTA/המבורגר */
+  align-items: center;
+  gap: 10px;
+}
+
+/* צד ימין: לוגו + קישורים בשורה אחת */
+.nav-right{
+  display: flex;
+  align-items: center;
+  gap: 14px; /* רווח בין לוגו לקישורים */
+}
+
+/* לוגו – גובה מותאם, הופך רספונסיבי */
+.brand-logo-wrap{
+  display: grid; place-items: center;
+}
+.brand-logo{
+  height: 40px;            /* גובה נעים לניווט */
+  width: auto;             /* יחס מקורי */
+  border-radius: 8px;      /* טיפה עיגול – נראה פרימיום */
+  box-shadow: var(--shadow);
+  background: #fff;
+}
+
+/* קישורי ניווט נקיים, בלי נקודות */
+.navlinks{
+  display: none;           /* מובייל—מוסתר, דסקטופ—מוצג */
+  gap: 18px;
+  align-items: center;
+}
+.navlinks--clean{
+  list-style: none;        /* מסיר נקודות */
+  margin: 0; padding: 0;
+}
+@media (min-width: 768px){
+  .navlinks{ display: flex; }
+}
+.navlink{
+  color: #111827; text-decoration: none; cursor: pointer; padding: 6px 4px;
+}
+.navlink:hover{ color: var(--primary); }
+
+/* צד שמאל: CTA בדסקטופ, המבורגר במובייל */
+.nav-left{
+  display: flex; align-items: center; gap: 8px; justify-self: end;
+}
+
+/* CTA רק בדסקטופ */
+.cta-desktop{ display: none; }
+@media (min-width: 768px){
+  .cta-desktop{ display: inline-flex; }
+}
+
+/* כפתור המבורגר – רק מובייל */
+.show-on-mobile{ display: inline-flex; }
+@media (min-width: 768px){
+  .show-on-mobile{ display: none; }
+}
+
+/* Drawer מובייל (נשאר כמו קודם, רק בלי נקודות) */
+.drawer-nav{
+  display: grid; gap: 10px; align-content: start;
+}
+.drawer-link{
+  display: block; padding: 12px 8px; border-radius: 10px;
+  color: #111827; text-decoration: none; background: #f7f7f9;
+}
+.drawer-link:hover{ background: #eef7ff; }
+/* לוגו חד ואלגנטי בניווט */
+.brand-logo-wrap{
+  display: grid;
+  place-items: center;
+}
+
+.brand-logo{
+  height: 44px;            /* גובה נעים; אפשר לשחק 40–48px */
+  width: auto;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.08));
+  border-radius: 6px;      /* עדינות; אפשר 0 אם רוצים קצוות ישרים */
+  background: transparent; /* בלי רקע לבן על לוגו שקוף */
+}
+
+/* ריווח עדין בין לוגו לקישורים */
+.nav-right{
+  display: flex;
+  align-items: center;
+  gap: 18px; /* היה 14, נותן נשימה */
+}
+
+/* רשימת קישורים נקייה ומיושרת מימין לשמאל */
+.navlinks--clean{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navlink{
+  color: #0f172a;                 /* טון כהה חד */
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 6px;               /* קצת יותר “אוויר” */
+  border-radius: 8px;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.navlink:hover{
+  background: rgba(14,165,233,.10);
+  color: #0ea5e9;
+  transform: translateY(-1px);
+}
+
+/* CTA בצד שמאל בלבד בדסקטופ */
+.nav-left{ justify-self: end; }
+.cta-desktop{
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+/* --- לו״ז: תמונה אחת גדולה במרכז, קריאה וברורה --- */
+.schedule-frame{
+  margin: 0 auto;
+  width: min(95vw, 960px);
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.schedule-img{
+  display: block;
+  width: 100%;
+  height: auto;
+  /* אם הלוז טקסטואלי צר ורוצים למנוע חיתוכים:
+     object-fit: contain; background:#000; height: auto; */
+}
+
+/* --- וידאו: הטמעה רספונסיבית, מעודן ונקי --- */
+.video-embed{
+  width: min(96vw, 980px);
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,0,0,.06);
+  background: #000;
+}
+.video-embed iframe{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
