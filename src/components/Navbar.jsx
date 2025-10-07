@@ -87,7 +87,7 @@ export default function Navbar() {
             <div className="drawer-header">
               <div className="brand-logo-wrap">
                 <img
-                  src="/images/logo.jpg"
+                  src={`${import.meta.env.BASE_URL}images/logo.jpg`}
                   alt="Matan Refaely"
                   className="brand-logo"
                   draggable="false"
